@@ -13,9 +13,9 @@
 ## 🧠 The Idea
 
 Most finance dashboards show numbers.  
-**Fintrak goes one step further — it explains them.**
+Fintrak goes one step further — it explains them.
 
-This project focuses on turning raw financial data into **clear, meaningful insights** while maintaining a smooth and premium user experience.
+This project focuses on turning raw financial data into clear, meaningful insights while maintaining a smooth and premium user experience.
 
 ---
 
@@ -37,6 +37,8 @@ Instead of just showing charts, Fintrak answers:
 - Time-based and category-based visualizations
 - Clean and distraction-free layout
 
+---
+
 ### Smart Insights Engine 🔥
 
 Automatically analyzes user data and generates insights like:
@@ -48,7 +50,7 @@ Automatically analyzes user data and generates insights like:
 - Spending streak detection
 - Income source contribution
 
-> This is the core highlight of the project.
+This is the core highlight of the project.
 
 ---
 
@@ -63,10 +65,29 @@ Automatically analyzes user data and generates insights like:
 
 ### Role-Based UI
 
-- **Admin** → full control
-- **Viewer** → read-only mode
+- Admin → full control  
+- Viewer → read-only mode  
 
 Simulated role switching to demonstrate UI behavior.
+
+---
+
+### Routing & Navigation
+
+Fintrak uses client-side routing for a seamless app-like experience.
+
+- Implemented using React Router
+- Smooth navigation between pages
+- No page reloads (SPA behavior)
+- Active route highlighting
+- Mobile menu auto-closes on navigation
+
+Routes:
+
+/              → Dashboard  
+/transaction   → Transactions  
+
+The routing system is scalable and can support protected routes and dynamic pages in the future.
 
 ---
 
@@ -76,14 +97,14 @@ Simulated role switching to demonstrate UI behavior.
 - Smooth scrolling using Lenis
 - Micro-interactions and subtle animations
 - Fully responsive design
-- Thoughtful spacing and typography
+- Clean spacing and typography
 
 ---
 
 ### Data Handling
 
 - Persistent data using LocalStorage
-- State managed via Redux Toolkit
+- State management via Redux Toolkit
 - Automatic sync between UI and storage
 
 ---
@@ -96,12 +117,13 @@ Simulated role switching to demonstrate UI behavior.
 
 ## 🛠 Tech Stack
 
-- React
-- Redux Toolkit
-- Tailwind CSS
-- Recharts
-- Lenis
-- LocalStorage
+- React  
+- React Router  
+- Redux Toolkit  
+- Tailwind CSS  
+- Recharts  
+- Lenis  
+- LocalStorage  
 
 ---
 
@@ -109,9 +131,9 @@ Simulated role switching to demonstrate UI behavior.
 
 ### Dashboard
 
-![Dashboard](public/Dash-1.png)
-![Dashboard](public/Dash-2.png)
-![Dashboard](public/Dash-3.png)
+![Dashboard](public/Dash-1.png)  
+![Dashboard](public/Dash-2.png)  
+![Dashboard](public/Dash-3.png)  
 
 ### Transaction
 
@@ -126,4 +148,3 @@ git clone https://github.com/abhijeet432005/fintrak.git
 cd fintrak
 npm install
 npm run dev
-```

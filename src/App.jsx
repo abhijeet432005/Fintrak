@@ -4,18 +4,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { initialTransactions } from "./data/Data";
 import { setRole, setTransactions } from "./store/reducer/TransactionSlice";
 import ReactLenis from "lenis/react";
-import Dashboard from './pages/Dashboard'
-import Transaction from './pages/Transaction'
+import MainRoutes from "./routes/MainRoutes";
+import { useLocation } from "react-router-dom";
 
 const App = () => {
   const dispatch = useDispatch();
   const transaction = useSelector((state) => state?.transaction?.transactions);
+  const {pathname} = useLocation()
 
   const [dark, setDark] = useState(() =>
     document.documentElement.classList.contains("dark"),
   );
 
-  const [page, setPage] = useState("dashboard");
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname])
+
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", dark);
@@ -34,10 +38,6 @@ const App = () => {
 
     const savedRole = localStorage.getItem("role") || "viewer";
     dispatch(setRole(savedRole));
-
-    setTimeout(() => {
-      window.scrollTo(0, 0);
-    }, 50);
   }, []);
 
   useEffect(() => {
@@ -57,18 +57,9 @@ const App = () => {
       <Navbar
         dark={dark}
         onThemeToggle={() => setDark((d) => !d)}
-        currentPage={page}
-        onNavigate={setPage}
       />
 
-      {page === "dashboard" ? (
-        <Dashboard
-          dark={dark}
-          onNavigateToTransactions={() => setPage("transactions")}
-        />
-      ) : (
-        <Transaction />
-      )}
+      <MainRoutes />
     </ReactLenis>
   );
 };

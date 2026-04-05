@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addTransaction, setRole } from "../../store/reducer/TransactionSlice";
 import TransactionForm from "../../features/transaction/TransactionForm";
 import AnimatedThemeToggler from "../../features/theme/AnimatedThemeToggler";
+import { NavLink } from "react-router-dom";
 
 // ── Icons ─────────────────────────────────────────────────────────────────────
 const SunIcon = () => (
@@ -304,16 +305,14 @@ const RoleDropdown = ({ dark, onAddClick }) => {
 
 // ── Mobile Menu ───────────────────────────────────────────────────────────────
 const MobileMenu = ({
-  currentPage,
-  onNavigate,
   onClose,
   balance,
   role,
   onAddClick,
 }) => {
   const navLinks = [
-    { key: "dashboard", label: "Dashboard" },
-    { key: "transactions", label: "Transactions" },
+    { link: "Dashboard", path: "/" },
+    { link: "Transaction", path: "/transaction" },
   ];
 
   return (
@@ -335,31 +334,35 @@ const MobileMenu = ({
         </span>
       </div>
 
-      {navLinks.map((l) => (
-        <button
-          key={l.key}
-          onClick={() => {
-            onNavigate(l.key);
-            onClose();
-          }}
-          className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 ${
-            currentPage === l.key
-              ? "bg-zinc-100 dark:bg-white/[0.08] text-zinc-800 dark:text-white/85"
-              : "text-zinc-500 dark:text-white/40 hover:bg-zinc-50 dark:hover:bg-white/[0.04] hover:text-zinc-700 dark:hover:text-white/65"
-          }`}
+      {navLinks.map((elem, index) => (
+        <NavLink
+          key={index}
+          to={elem.path}
+          onClick={onClose}
+          className={({ isActive }) =>
+            `w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 ${
+              isActive
+                ? "bg-zinc-100 dark:bg-white/[0.08] text-zinc-800 dark:text-white/85"
+                : "text-zinc-500 dark:text-white/40 hover:bg-zinc-50 dark:hover:bg-white/[0.04] hover:text-zinc-700 dark:hover:text-white/65"
+            }`
+          }
         >
-          {l.label}
-          {currentPage === l.key && (
-            <span className="ml-auto w-1.5 h-1.5 rounded-full bg-zinc-400 dark:bg-white/30" />
+          {({ isActive }) => (
+            <>
+              {elem.link}
+              {isActive && (
+                <span className="ml-auto w-1.5 h-1.5 rounded-full bg-zinc-400 dark:bg-white/30" />
+              )}
+            </>
           )}
-        </button>
+        </NavLink>
       ))}
 
       {role === "admin" && (
         <button
           onClick={onAddClick}
           className="md:hidden items-center px-3 py-1.5 text-xs font-medium rounded-lg 
-      bg-emerald-500 text-white hover:bg-emerald-600 transition"
+      bg-emerald-500 text-white hover:bg-emerald-600 transition mt-2"
         >
           + Add
         </button>
@@ -369,7 +372,7 @@ const MobileMenu = ({
 };
 
 // ── Navbar ────────────────────────────────────────────────────────────────────
-const Navbar = ({ dark, currentPage, onNavigate }) => {
+const Navbar = ({ dark }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const role = useSelector((s) => s.transaction?.role);
@@ -377,13 +380,10 @@ const Navbar = ({ dark, currentPage, onNavigate }) => {
   const dispatch = useDispatch();
 
   // Close mobile menu on page change
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [currentPage]);
 
   const navLinks = [
-    { key: "dashboard", label: "Dashboard" },
-    { key: "transactions", label: "Transactions" },
+    { link: "Dashboard", path: "/" },
+    { link: "Transaction", path: "/transaction" },
   ];
 
   return (
@@ -414,18 +414,20 @@ const Navbar = ({ dark, currentPage, onNavigate }) => {
 
           {/* Desktop nav links */}
           <div className="hidden sm:flex items-center gap-1">
-            {navLinks.map((l) => (
-              <button
-                key={l.key}
-                onClick={() => onNavigate?.(l.key)}
-                className={`px-3 py-1.5 rounded-lg text-[13px] font-medium transition-all duration-150 ${
-                  currentPage === l.key
-                    ? "bg-zinc-100 dark:bg-white/[0.08] text-zinc-800 dark:text-white/85"
-                    : "text-zinc-500 dark:text-white/35 hover:text-zinc-700 dark:hover:text-white/65 hover:bg-zinc-50 dark:hover:bg-white/[0.04]"
-                }`}
+            {navLinks.map((elem, index) => (
+              <NavLink
+                key={index}
+                to={elem.path}
+                className={({ isActive }) =>
+                  `px-3 py-1.5 rounded-lg text-[13px] font-medium transition-all duration-150 ${
+                    isActive
+                      ? "bg-zinc-100 dark:bg-white/[0.08] text-zinc-800 dark:text-white/85"
+                      : "text-zinc-500 dark:text-white/35 hover:text-zinc-700 dark:hover:text-white/65 hover:bg-zinc-50 dark:hover:bg-white/[0.04]"
+                  }`
+                }
               >
-                {l.label}
-              </button>
+                {elem.link}
+              </NavLink>
             ))}
           </div>
         </div>
@@ -466,8 +468,6 @@ const Navbar = ({ dark, currentPage, onNavigate }) => {
       {/* ── Mobile dropdown menu ── */}
       {mobileOpen && (
         <MobileMenu
-          currentPage={currentPage}
-          onNavigate={onNavigate}
           onClose={() => setMobileOpen(false)}
           balance={balance}
           role={role}

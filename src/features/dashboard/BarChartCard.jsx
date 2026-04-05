@@ -71,7 +71,7 @@ const IncomeExpenseBarChart = ({ data, isLoading }) => {
       <div className="flex items-center justify-between mb-5">
         <div>
           <h3 className="text-sm font-semibold text-zinc-700 dark:text-white/75">Income vs Expense</h3>
-          <p className="text-xs text-zinc-400 dark:text-white/25 mt-0.5">Last 6 months</p>
+          <p className="text-xs text-zinc-400 dark:text-white/25 mt-0.5">Monthly breakdown</p>
         </div>
         <div className="flex items-center gap-3 text-xs">
           <span className="flex items-center gap-1.5 text-zinc-500 dark:text-white/40">

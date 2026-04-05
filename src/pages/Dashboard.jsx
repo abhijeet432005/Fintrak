@@ -1,6 +1,6 @@
 import { lazy, Suspense } from "react";
 import { useDashboardData } from "../features/dashboard/useDashboardStats";
-import { StatCardSkeleton } from "../features/dashboard/StatCard";
+import StatCard, { StatCardSkeleton } from "../features/dashboard/StatCard";
 import { MagicCard } from "../components/magicCard/MagicCard";
 import Insights from "../features/insights/Insights";
 import { useSelector } from "react-redux";
@@ -16,7 +16,7 @@ const IncomeExpenseBarChart = lazy(
 const LatestTransactions = lazy(
   () => import("../features/dashboard/LatestTransactions"),
 );
-const StatCard = lazy(() => import("../features/dashboard/StatCard"));
+
 
 const getGreeting = () => {
   const h = new Date().getHours();

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Theme init (no flicker) -->
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme')
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (stored === 'dark' || (!stored && prefersDark)) {
+          document.documentElement.classList.add('dark')
+        }
+      } catch (_) { }
+    })()
+  </script>
+
+  <!-- Meta -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO -->
+  <title>Fintrak — Finance Dashboard</title>
+  <meta name="description"
+    content="Fintrak is a modern finance dashboard to track income, expenses, and smart insights with clean UI and interactive charts." />
+  <meta name="keywords" content="fintrak, finance dashboard, expense tracker, react dashboard, personal finance app" />
+  <meta name="author" content="Abhijeet Kumar" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Fintrak — Finance Dashboard" />
+  <meta property="og:description" content="Track your income, expenses, and financial insights with Fintrak." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="/" />
+  <meta property="og:image" content="/vite.svg" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Fintrak — Finance Dashboard" />
+  <meta name="twitter:description" content="Modern finance dashboard built with React, Redux, and Tailwind." />
+  <meta name="twitter:image" content="/vite.svg" />
+
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#0c0c0e" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/android-chrome-192x192.png" />
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body class="bg-white dark:bg-[#0c0c0e] transition-colors duration-300 font-[Inter]">
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
+</html>

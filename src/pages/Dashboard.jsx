@@ -18,12 +18,12 @@ const LatestTransactions = lazy(
   () => import("../features/dashboard/LatestTransactions"),
 );
 
-
 const getGreeting = () => {
   const h = new Date().getHours();
-  if (h < 12) return "Good morning";
-  if (h < 17) return "Good afternoon";
-  return "Good evening";
+  if (h >= 5 && h < 12) return "Good morning";
+  if (h >= 12 && h < 17) return "Good afternoon";
+  if (h >= 17 && h < 21) return "Good evening";
+  return "Good night";
 };
 
 const EmptyDashboard = ({ onNavigateToTransactions }) => (
@@ -127,7 +127,9 @@ const Dashboard = ({ dark }) => {
         {error && <ErrorBanner message={error?.message} />}
 
         {isEmpty ? (
-          <EmptyDashboard onNavigateToTransactions={() => navigate("/transaction")} />
+          <EmptyDashboard
+            onNavigateToTransactions={() => navigate("/transaction")}
+          />
         ) : (
           <>
             {/* Stat cards — one Suspense wraps all three; isLoading handles per-card skeleton */}

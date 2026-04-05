@@ -6,6 +6,7 @@ import Insights from "../features/insights/Insights";
 import { useSelector } from "react-redux";
 import { exportToCSV } from "../utils/exportCSV";
 import { Button } from "../components/Buttons/Button";
+import { useNavigate } from "react-router-dom";
 
 const SpendingPieChart = lazy(
   () => import("../features/dashboard/PieChartCard"),
@@ -69,7 +70,8 @@ const ChartSkeleton = ({ className }) => (
   />
 );
 
-const Dashboard = ({ dark, onNavigateToTransactions }) => {
+const Dashboard = ({ dark }) => {
+  const navigate = useNavigate();
   const { stats, barData, pieData, latest, isLoading, total, error } =
     useDashboardData();
 
@@ -125,7 +127,7 @@ const Dashboard = ({ dark, onNavigateToTransactions }) => {
         {error && <ErrorBanner message={error?.message} />}
 
         {isEmpty ? (
-          <EmptyDashboard onNavigateToTransactions={onNavigateToTransactions} />
+          <EmptyDashboard onNavigateToTransactions={() => navigate("/transaction")} />
         ) : (
           <>
             {/* Stat cards — one Suspense wraps all three; isLoading handles per-card skeleton */}
@@ -205,7 +207,7 @@ const Dashboard = ({ dark, onNavigateToTransactions }) => {
                 <LatestTransactions
                   transactions={safeLatest}
                   isLoading={isLoading}
-                  onViewAll={onNavigateToTransactions}
+                  onViewAll={() => navigate("/transaction")}
                 />
               </Suspense>
             </div>

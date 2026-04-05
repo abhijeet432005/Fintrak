@@ -6,7 +6,7 @@
 
 ## 🚀 Live Demo
 
-👉 https://your-link.vercel.app
+👉 https://fintrak-investment.vercel.app/
 
 ---
 

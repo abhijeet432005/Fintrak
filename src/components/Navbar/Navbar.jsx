@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addTransaction, setRole } from "../../store/reducer/TransactionSlice";
 import TransactionForm from "../../features/transaction/TransactionForm";
 import AnimatedThemeToggler from "../../features/theme/AnimatedThemeToggler";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 // ── Icons ─────────────────────────────────────────────────────────────────────
 const SunIcon = () => (
@@ -202,10 +202,10 @@ const RoleDropdown = ({ dark, onAddClick }) => {
         <div className="absolute top-[calc(100%+6px)] right-0 w-52 bg-white dark:bg-[#131316] border border-zinc-200 dark:border-white/[0.08] rounded-xl overflow-hidden z-50 shadow-xl shadow-black/10 dark:shadow-black/60">
           <div className="px-3.5 py-3 border-b border-zinc-100 dark:border-white/[0.06]">
             <p className="text-[13px] font-medium text-zinc-700 dark:text-white/80">
-              Alex Davidson
+              Abhijeet Kumar
             </p>
             <p className="text-[11px] text-zinc-400 dark:text-white/30 mt-0.5">
-              alex@fintrak.io
+              abhijeet@fintrak.io
             </p>
           </div>
 
@@ -378,6 +378,7 @@ const Navbar = ({ dark }) => {
   const role = useSelector((s) => s.transaction?.role);
   const balance = useBalance();
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   // Close mobile menu on page change
 
@@ -393,7 +394,7 @@ const Navbar = ({ dark }) => {
         {/* Left: brand + desktop nav */}
         <div className="flex items-center gap-4 sm:gap-6 min-w-0">
           {/* Brand */}
-          <div className="flex items-center gap-2 shrink-0">
+          <div onClick={() => navigate("/")} className="flex items-center gap-2 shrink-0 cursor-pointer">
             <div className="w-7 h-7 rounded-lg bg-blue-100 dark:bg-blue-500/15 flex items-center justify-center">
               <svg
                 viewBox="0 0 24 24"

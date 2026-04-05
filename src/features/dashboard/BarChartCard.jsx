@@ -44,7 +44,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 }
 
 const IncomeExpenseBarChart = ({ data, isLoading }) => {
-  // Live-track dark mode so chart re-renders on theme switch
+
   const [dark, setDark] = useState(() =>
     document.documentElement.classList.contains('dark')
   )
